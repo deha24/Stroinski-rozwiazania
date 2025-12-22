@@ -9,11 +9,9 @@
 #define SHM_SIZE 1024
 
 int main() {
-    // Generujemy klucz, aby Czytelnik mógł znaleźć ten sam segment
-    key_t key = ftok(".", 'S'); 
     
     // Tworzymy pamięć (lub pobieramy jeśli istnieje)
-    int shmid = shmget(key, SHM_SIZE, 0666 | IPC_CREAT);
+    int shmid = shmget(1234, SHM_SIZE, 0666 | IPC_CREAT);
     if (shmid == -1) { perror("shmget"); return 1; }
 
     // Dołączamy pamięć

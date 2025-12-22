@@ -9,11 +9,9 @@
 #define SHM_SIZE 1024
 
 int main() {
-    // Ten sam klucz co u Pisarza
-    key_t key = ftok(".", 'S');
-    
+
     // Pobieramy ID istniejącej pamięci
-    int shmid = shmget(key, SHM_SIZE, 0666);
+    int shmid = shmget(1234, SHM_SIZE, 0666);
     if (shmid == -1) { 
         printf("Nie znaleziono pamięci! Uruchom najpierw program 1a.\n");
         return 1; 

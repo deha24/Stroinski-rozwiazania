@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
 
     while (read(fd, &c, 1) > 0) {
         if (isalpha(c)) {
-            c = tolower(c);
+            c = tolower(c); //czy może byc isaplha i tolwer?
             counts[c - 'a']++;
             total++;
         }

@@ -28,7 +28,6 @@ int main(int argc, char *argv[]) {
         // Wysyłamy serię komunikatów o różnych typach
         for(int i=1; i<=3; i++) {
             msg.mtype = i;
-            sprintf(msg.mtext, "Wiadomość typu %d", i);
             msgsnd(msgid, &msg, sizeof(msg.mtext), 0);
         }
         printf("[Nadawca] Wysłano wiadomości typów 1, 2, 3.\n");
@@ -43,9 +42,9 @@ int main(int argc, char *argv[]) {
         // Odbieramy TYLKO typ podany w argumencie
         // IPC_NOWAIT sprawi, że nie zablokujemy się, jeśli nie ma takiego typu
         if (msgrcv(msgid, &msg, sizeof(msg.mtext), target_type, IPC_NOWAIT) != -1) {
-            printf(">> SUKCES: Odebrano: '%s'\n", msg.mtext);
+            printf(">> SUKCES: Odebrano: '%d'\n", target_type);
         } else {
-            printf(">> INFO: Brak wiadomości o typie %ld w kolejce.\n", target_type);
+            printf(">> INFO: Brak wiadomości o typie %d w kolejce.\n", target_type);
         }
 
         // Sprzątanie (wait dla dziecka i usunięcie kolejki)

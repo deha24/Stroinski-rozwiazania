@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
 
     char buf[1];
     while (read(fd, buf, 1) > 0) {
-        buf[0] = toupper(buf[0]);
+        buf[0] = toupper(buf[0]); //wykorzystać przesunięcie z kodów ASCII
         write(1, buf, 1); // Wypisz na STDOUT (deskryptor 1)
     }
 

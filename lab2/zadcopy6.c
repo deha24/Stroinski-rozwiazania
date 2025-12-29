@@ -16,7 +16,12 @@ int main() {
     // Kod rodzica:
     // Rodzic śpi przez 15 sekund i NIE wywołuje wait().
     // W tym czasie dzieci są "martwe", ale wciąż wiszą w tablicy procesów jako <defunct> (zombie).
-    printf("Rodzic śpi, sprawdź procesy poleceniem 'ps' (szukaj Z/defunct)...\n");
+    printf("Rodzic śpi, sprawdź procesy poleceniem 'ps' (poniżej):\n");
+   
+    if(fork() == 0){
+        execlp("ps", "ps", NULL);
+        exit(0);
+    }
     sleep(15); 
     
     printf("Rodzic kończy działanie (zombie zostaną usunięte przez init/system).\n");

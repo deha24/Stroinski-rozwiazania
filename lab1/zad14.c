@@ -29,4 +29,4 @@ int main(int argc, char *argv[]) {
     if (idx > 0) reverse_and_print(line, idx); // ostatnia linia bez entera
     close(fd);
     return 0;
-}
+}//zapisywanie do pliku?

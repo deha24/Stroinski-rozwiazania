@@ -13,7 +13,7 @@ int main() {
     pid_t pids[N];
     srand(time(NULL)); // Inicjalizacja losowości
 
-    printf("Tworzę %d potomków. Start wyścigu!\n", N);
+    printf("Tworzę %d potomków.\n", N);
 
     for (int i = 0; i < N; i++) {
         pids[i] = fork();
@@ -30,7 +30,6 @@ int main() {
     // Kod rodzica
     int status;
     pid_t winner = wait(&status); // Czeka na PIERWSZEGO zakończonego
-    printf("\n*** Zwycięzca: PID %d ***\nZabijam pozostałe procesy...\n", winner);
 
     for (int i = 0; i < N; i++) {
         if (pids[i] != winner) {
@@ -41,6 +40,6 @@ int main() {
     // Sprzątanie resztek (zapobieganie zombie z zabitych procesów)
     for (int i = 0; i < N - 1; i++) wait(NULL);
 
-    printf("Wszystkie procesy posprzątane. Koniec.\n");
+    printf("Wszystkie procesy zakonczone. Koniec.\n");
     return 0;
 }

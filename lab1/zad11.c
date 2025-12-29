@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
         }
     }
     
-    printf("Liczba slow: %ld\n", count);
+    printf("Liczba slow: %d\n", count);
     if (fd != 0) close(fd);
     return 0;
 }

@@ -2,11 +2,13 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 int main(int argc, char *argv[]) {
     if (argc != 3) return 1;
     int fd1 = open(argv[1], O_RDONLY);
     int fd2 = open(argv[2], O_RDONLY);
+    bool changed = false;
     
     char c1, c2;
     int r1, r2;
@@ -23,21 +25,27 @@ int main(int argc, char *argv[]) {
         pos++;
 
         if (r1 == 0 && r2 == 0) {
-            printf("Pliki sa identyczne.\n");
-            break;
+            if (changed==true){
+                break;
+            }else{
+                printf("Pliki są identyczne");
+                break;
+            }
         }
         
         if (r1 > 0 && r2 > 0) {
             if (c1 != c2) {
-                printf("Pliki roznia sie znak nr %d w linii %d\n", pos, line);
-                break;
+                printf("Pliki roznia sie od znaku nr %d w linii %d\n", pos, line);
+                changed = true;
             }
             if (c1 == '\n') { line++; pos = 0; }
         } else {
             // Jeden sie skonczyl
-            if (r1 > 0) printf("Plik %s zawiera %ld znakow wiecej\n", argv[1], total1 - total2);
-            else printf("Plik %s zawiera %ld znakow wiecej\n", argv[2], total2 - total1);
-            break;
+            if(changed == false){
+                if (r1 > 0) printf("Plik %s zawiera %d znakow wiecej\n", argv[1], total1 - total2);
+                else printf("Plik %s zawiera %d znakow wiecej\n", argv[2], total2 - total1);
+                break;
+            }
         }
     }
     close(fd1); close(fd2);

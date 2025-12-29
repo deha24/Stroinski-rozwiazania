@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
         int newline_streak = 0; // Do wykrywania pustych linii
 
         while(read(fd, &c, 1) > 0) {
-            if(isspace(c)) {
+            if(isspace(c)) { //zamiana isspace
                 if(w_idx > 0) { // Mamy całe słowo w buforze
                     word[w_idx] = '\0';
                     
